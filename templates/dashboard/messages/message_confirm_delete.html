@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حذف پیام | کیا آسانسور</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/products.css' %}">
+</head>
+<body>
+
+<div class="products-page">
+
+    <div class="delete-confirm-card">
+
+        <span class="delete-warning-icon">!</span>
+
+        <h1>حذف پیام</h1>
+
+        <p>
+            آیا از حذف پیام ارسال‌شده توسط
+            <strong>{{ contact_message.name }}</strong>
+            اطمینان داری؟
+        </p>
+
+        <p class="warning-text">این عملیات قابل بازگشت نیست.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <button type="submit" class="delete-button">تأیید حذف</button>
+
+            <a href="{% url 'dashboard:message_list' %}" class="btn-secondary">انصراف</a>
+        </form>
+
+    </div>
+
+</div>
+</body>
+</html>

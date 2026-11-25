@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ page_title }} | کیا آسانسور</title>
+
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/products.css' %}">
+</head>
+
+<body>
+
+<div class="products-page">
+
+    <header class="products-header">
+        <div>
+            <span class="section-eyebrow">KIA ELEVATOR / PRODUCTS</span>
+            <h1>{{ page_title }}</h1>
+            <p>اطلاعات محصول را در این قسمت وارد یا ویرایش کنید.</p>
+        </div>
+
+        <a href="{% url 'dashboard:product_list' %}" class="btn-secondary">
+            بازگشت به محصولات
+        </a>
+    </header>
+
+    <div class="product-form-card">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+
+                <div class="form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="field-error">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+            {% if product and product.image %}
+                <div class="form-group">
+                    <label>تصویر فعلی محصول</label>
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        style="width: 150px; height: 120px; object-fit: cover; border-radius: 8px;"
+                    >
+                </div>
+            {% endif %}
+
+            <div class="form-actions">
+
+                <button type="submit" class="btn-primary">
+                    {{ submit_text }}
+                </button>
+
+                <a href="{% url 'dashboard:product_list' %}" class="btn-secondary">
+                    انصراف
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

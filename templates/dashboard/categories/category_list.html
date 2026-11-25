@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیریت دسته‌بندی‌ها | کیا آسانسور</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/products.css' %}">
+</head>
+<body>
+
+<div class="products-page">
+
+    <header class="products-header">
+        <div>
+            <span class="section-eyebrow">CATEGORY MANAGEMENT</span>
+            <h1>مدیریت دسته‌بندی‌ها</h1>
+            <p>ایجاد و مدیریت دسته‌بندی محصولات</p>
+        </div>
+        <a href="{% url 'dashboard:home' %}" class="btn-secondary">بازگشت به داشبورد</a>
+    </header>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="products-toolbar">
+
+        <form method="get" class="filter-form">
+            <input type="text" name="q" value="{{ search_query }}" placeholder="جست‌وجوی دسته‌بندی...">
+            <button type="submit" class="btn-primary">جست‌وجو</button>
+            <a href="{% url 'dashboard:category_list' %}" class="btn-secondary">پاک کردن</a>
+        </form>
+
+        {% if perms.core.add_category %}
+            <a href="{% url 'dashboard:category_create' %}" class="btn-primary add-button">
+                + افزودن دسته‌بندی
+            </a>
+        {% endif %}
+
+    </div>
+
+    <div class="products-table-wrapper">
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th>نام دسته‌بندی</th>
+                    <th>شناسه URL</th>
+                    <th>وضعیت</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for category in page_obj %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td dir="ltr">{{ category.slug }}</td>
+                        <td>
+                            {% if category.is_active %}
+                                <span class="status-badge active">فعال</span>
+                            {% else %}
+                                <span class="status-badge inactive">غیرفعال</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ category.created_at|date:"Y/m/d" }}</td>
+                        <td class="action-buttons">
+                            {% if perms.core.change_category %}
+                                <a href="{% url 'dashboard:category_update' category.pk %}" class="edit-button">ویرایش</a>
+                            {% endif %}
+
+                            {% if perms.core.delete_category %}
+                                <a href="{% url 'dashboard:category_delete' category.pk %}" class="delete-button">حذف</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="empty-table">دسته‌بندی‌ای پیدا نشد.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if page_obj.has_other_pages %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}&q={{ search_query|urlencode }}">قبلی</a>
+            {% endif %}
+
+            <span>صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&q={{ search_query|urlencode }}">بعدی</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</div>
+</body>
+</html>

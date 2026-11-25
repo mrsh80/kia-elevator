@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+تماس با کیا آسانسور | ارتباط با ما
+{% endblock %}
+
+{% block meta_description %}
+برای دریافت اطلاعات، مشاوره و آشنایی بیشتر با محصولات و تجهیزات کیا آسانسور با ما در ارتباط باشید.
+{% endblock %}
+
+{% block og_title %}
+تماس با کیا آسانسور
+{% endblock %}
+
+{% block og_description %}
+راه‌های ارتباطی با کیا آسانسور و ارسال پیام برای دریافت اطلاعات بیشتر.
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="contact-page">
+
+<div class="container">
+
+
+    <!-- Header -->
+
+    <div class="contact-page-header">
+
+        <span class="section-label">
+            تماس با ما
+        </span>
+
+        <h1>
+            با ما در ارتباط باشید
+        </h1>
+
+        <p>
+            برای دریافت اطلاعات بیشتر درباره محصولات و تجهیزات
+            کیا آسانسور، پیام خود را برای ما ارسال کنید.
+        </p>
+
+    </div>
+
+
+    <!-- Contact Content -->
+
+    <div class="contact-page-content">
+
+
+        <!-- Contact Information -->
+
+        <div class="contact-info">
+
+            <h2>
+                اطلاعات تماس
+            </h2>
+
+            <p>
+                برای دریافت اطلاعات بیشتر، مشاوره و پاسخ به
+                سوالات خود می‌توانید با ما در ارتباط باشید.
+            </p>
+
+
+            <div class="contact-info-item">
+
+                <span class="contact-info-label">
+                    تلفن
+                </span>
+
+                <span class="contact-info-value">
+                    اطلاعات تماس در نسخه عمومی نمایش داده نمی‌شود.
+                </span>
+
+            </div>
+
+
+            <div class="contact-info-item">
+
+                <span class="contact-info-label">
+                    ایمیل
+                </span>
+
+                <span class="contact-info-value">
+                    اطلاعات تماس در نسخه عمومی نمایش داده نمی‌شود.
+                </span>
+
+            </div>
+
+
+            <div class="contact-info-item">
+
+                <span class="contact-info-label">
+                    آدرس
+                </span>
+
+                <span class="contact-info-value">
+               		اطلاعات تماس در نسخه عمومی نمایش داده نمی‌شود.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Contact Form -->
+
+        <div class="contact-form-wrapper">
+
+
+            {% if success %}
+
+                <div class="contact-success">
+
+                    پیام شما با موفقیت ارسال شد.
+
+                </div>
+
+            {% endif %}
+
+
+            {% if rate_limited %}
+
+                <div class="contact-error">
+
+                    لطفاً کمی صبر کنید و سپس دوباره تلاش کنید.
+
+                </div>
+
+            {% endif %}
+
+
+            {% if form.non_field_errors %}
+
+                <div class="contact-error">
+
+                    {% for error in form.non_field_errors %}
+
+                        {{ error }}
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <form
+                method="post"
+                class="contact-form"
+            >
+
+                {% csrf_token %}
+
+
+                {{ form.website }}
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.name.id_for_label }}">
+                        نام
+                    </label>
+
+                    {{ form.name }}
+
+                    {% if form.name.errors %}
+
+                        <div class="form-error">
+
+                            {{ form.name.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.phone.id_for_label }}">
+                        شماره تماس
+                    </label>
+
+                    {{ form.phone }}
+
+                    {% if form.phone.errors %}
+
+                        <div class="form-error">
+
+                            {{ form.phone.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        ایمیل
+                    </label>
+
+                    {{ form.email }}
+
+                    {% if form.email.errors %}
+
+                        <div class="form-error">
+
+                            {{ form.email.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.subject.id_for_label }}">
+                        موضوع
+                    </label>
+
+                    {{ form.subject }}
+
+                    {% if form.subject.errors %}
+
+                        <div class="form-error">
+
+                            {{ form.subject.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.message.id_for_label }}">
+                        پیام
+                    </label>
+
+                    {{ form.message }}
+
+                    {% if form.message.errors %}
+
+                        <div class="form-error">
+
+                            {{ form.message.errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary contact-submit"
+                >
+                    ارسال پیام
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+{% endblock %}

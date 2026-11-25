@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>داشبورد مدیریت | کیا آسانسور</title>
+
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-icon">K</div>
+            <div>
+                <h2>KIA ELEVATOR</h2>
+                <span>پنل مدیریت</span>
+            </div>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="sidebar-menu">
+
+            <span class="menu-label">مدیریت اصلی</span>
+
+            <a href="{% url 'dashboard:home' %}" class="menu-item active">
+                <span>▦</span>
+                <span>داشبورد</span>
+            </a>
+
+            <a href="{% url 'dashboard:product_list' %}" class="menu-item">
+                <span>▣</span>
+                <span>مدیریت محصولات</span>
+            </a>
+
+<a href="{% url 'dashboard:category_list' %}" class="menu-item">
+    <span>▤</span>
+    <span>دسته‌بندی‌ها</span>
+</a>
+
+<a href="{% url 'dashboard:message_list' %}" class="menu-item">
+    <span>▧</span>
+    <span>پیام‌های دریافتی</span>
+</a>
+
+            <span class="menu-label">سیستم</span>
+
+            <a href="{% url 'admin:index' %}" class="menu-item">
+                <span>⚙</span>
+                <span>تنظیمات مدیریت</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="{% url 'home' %}" class="menu-item">
+                <span>↗</span>
+                <span>مشاهده وب‌سایت</span>
+            </a>
+
+            <a href="{% url 'admin:index' %}" class="menu-item">
+                <span>⌘</span>
+                <span>پنل Django Admin</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h1>داشبورد مدیریت</h1>
+                <p>به پنل مدیریت کیا آسانسور خوش آمدید.</p>
+            </div>
+
+            <div class="admin-profile">
+                <div class="profile-avatar">A</div>
+
+                <div>
+                    <strong>{{ request.user.username }}</strong>
+                    <span>مدیر سیستم</span>
+                </div>
+            </div>
+
+        </header>
+
+
+        <section class="dashboard-content">
+
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+
+                <div>
+                    <span class="section-eyebrow">CONTROL CENTER</span>
+                    <h2>نمای کلی کسب‌وکار</h2>
+                    <p>وضعیت کلی وب‌سایت خود را از این قسمت مدیریت کنید.</p>
+                </div>
+
+                <div class="welcome-date">
+                    KIA ELEVATOR
+                </div>
+
+            </div>
+
+
+            <!-- Statistics -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon">▣</div>
+                    <span>تعداد محصولات</span>
+                    <h3>{{ total_products }}</h3>
+                    <small>مجموع محصولات ثبت‌شده</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">▤</div>
+                    <span>دسته‌بندی‌ها</span>
+                    <h3>{{ total_categories }}</h3>
+                    <small>مجموع دسته‌بندی‌ها</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✉</div>
+                    <span>پیام‌های دریافتی</span>
+                    <h3>{{ total_messages }}</h3>
+                    <small>مجموع پیام‌های تماس</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">◉</div>
+                    <span>محصولات فعال</span>
+                    <h3>{{ active_products }}</h3>
+                    <small>محصولات قابل نمایش در سایت</small>
+                </div>
+
+            </div>
+
+
+            <!-- Quick Actions -->
+            <section class="panel-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-eyebrow">QUICK ACCESS</span>
+                        <h2>دسترسی سریع</h2>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+
+                    <!-- Add Product -->
+                    <a href="{% url 'dashboard:product_create' %}" class="action-card">
+
+                        <span class="action-icon">＋</span>
+
+                        <div>
+                            <strong>افزودن محصول</strong>
+                            <small>ثبت محصول جدید</small>
+                        </div>
+
+                        <span class="action-arrow">←</span>
+
+                    </a>
+
+
+                    <!-- Categories -->
+<a href="{% url 'dashboard:category_list' %}" class="action-card">
+    <span class="action-icon">▤</span>
+    <div>
+        <strong>مدیریت دسته‌بندی‌ها</strong>
+        <small>مشاهده و ویرایش دسته‌ها</small>
+    </div>
+    <span class="action-arrow">←</span>
+</a>
+
+
+                    <!-- Messages -->
+<a href="{% url 'dashboard:message_list' %}" class="action-card">
+    <span class="action-icon">✉</span>
+    <div>
+        <strong>مشاهده پیام‌ها</strong>
+        <small>بررسی پیام‌های مشتریان</small>
+    </div>
+    <span class="action-arrow">←</span>
+</a>
+
+                </div>
+
+            </section>
+
+
+            <!-- Recent Activity -->
+            <section class="panel-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-eyebrow">RECENT ACTIVITY</span>
+                        <h2>آخرین فعالیت‌ها</h2>
+                    </div>
+                </div>
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">◷</div>
+
+                    <h3>اطلاعات در حال آماده‌سازی است</h3>
+
+                    <p>
+                        در مراحل بعد، اطلاعات واقعی محصولات و پیام‌ها
+                        در این قسمت نمایش داده می‌شوند.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

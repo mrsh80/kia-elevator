@@ -1,0 +1,223 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="{% block meta_description %}کیا آسانسور | ارائه محصولات و تجهیزات تخصصی صنعت آسانسور با کیفیت و طراحی مدرن{% endblock %}">
+
+    <meta name="robots"
+          content="{% block meta_robots %}index, follow{% endblock %}">
+
+    <meta name="theme-color" content="#111111">
+
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type"
+          content="{% block og_type %}website{% endblock %}">
+
+    <meta property="og:title"
+          content="{% block og_title %}کیا آسانسور{% endblock %}">
+
+    <meta property="og:description"
+          content="{% block og_description %}ارائه محصولات و تجهیزات تخصصی صنعت آسانسور{% endblock %}">
+
+    <meta property="og:url"
+          content="{{ request.build_absolute_uri }}">
+
+    <meta property="og:locale" content="fa_IR">
+
+    <title>
+        {% block title %}
+            کیا آسانسور | تجهیزات صنعت آسانسور
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header-footer.css' %}">
+
+    {% block extra_css %}{% endblock %}
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "{{ request.scheme }}://{{ request.get_host }}/#organization",
+                "name": "کیا آسانسور",
+                "url": "{{ request.scheme }}://{{ request.get_host }}/"
+            },
+            {
+                "@type": "WebSite",
+                "@id": "{{ request.scheme }}://{{ request.get_host }}/#website",
+                "name": "کیا آسانسور",
+                "url": "{{ request.scheme }}://{{ request.get_host }}/",
+                "publisher": {
+                    "@id": "{{ request.scheme }}://{{ request.get_host }}/#organization"
+                },
+                "inLanguage": "fa-IR"
+            }
+        ]
+    }
+    </script>
+
+    {% block structured_data %}{% endblock %}
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+
+        <div class="container header-container">
+
+            <!-- BRAND -->
+            <a href="{% url 'home' %}"
+               class="logo"
+               aria-label="صفحه اصلی کیا آسانسور">
+
+                <span class="logo-mark" aria-hidden="true">
+                    K
+                </span>
+
+                <span class="logo-text">
+                    <strong>کیا آسانسور</strong>
+                    <small>تجهیزات تخصصی آسانسور</small>
+                </span>
+
+            </a>
+
+            <!-- NAVIGATION -->
+            <nav class="main-nav"
+                 id="mainNav"
+                 aria-label="منوی اصلی">
+
+                <a href="{% url 'home' %}"
+                   {% if request.resolver_match.url_name == 'home' %}
+                   aria-current="page"
+                   {% endif %}>
+                    خانه
+                </a>
+
+                <a href="{% url 'product_list' %}"
+                   {% if request.resolver_match.url_name == 'product_list' or request.resolver_match.url_name == 'product_detail' or request.resolver_match.url_name == 'category_products' %}
+                   aria-current="page"
+                   {% endif %}>
+                    محصولات
+                </a>
+
+                <a href="{% url 'about' %}"
+                   {% if request.resolver_match.url_name == 'about' %}
+                   aria-current="page"
+                   {% endif %}>
+                    درباره ما
+                </a>
+
+                <a href="{% url 'contact' %}"
+                   {% if request.resolver_match.url_name == 'contact' %}
+                   aria-current="page"
+                   {% endif %}>
+                    تماس با ما
+                </a>
+
+                <!-- MOBILE CONTACT -->
+                <a href="tel:0000000000"
+                   class="mobile-contact-link">
+                    تماس مستقیم با شرکت
+                </a>
+
+            </nav>
+
+            <!-- DESKTOP CONTACT -->
+            <a href="tel:000000000"
+               class="header-contact">
+
+                <span class="header-contact-icon" aria-hidden="true">
+                    ☎
+                </span>
+
+                <span>
+                    <small>ارتباط با کارشناسان</small>
+                    <strong dir="ltr">00000000000</strong>
+                </span>
+
+            </a>
+
+            <!-- MOBILE MENU BUTTON -->
+            <button class="menu-button"
+                    id="menuButton"
+                    type="button"
+                    aria-label="باز کردن منو"
+                    aria-expanded="false"
+                    aria-controls="mainNav">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+
+        <div class="container footer-container">
+
+            <div class="footer-brand">
+
+                <span class="footer-brand-mark" aria-hidden="true">
+                    K
+                </span>
+
+                <div>
+                    <strong>کیا آسانسور</strong>
+                    <p>تجهیزات تخصصی صنعت آسانسور</p>
+                </div>
+
+            </div>
+
+            <div class="footer-contact">
+
+                <span>ارتباط با ما</span>
+
+                <a href="tel:000000000" dir="ltr">
+                    00000000000
+                </a>
+
+            </div>
+
+            <p class="footer-copyright">
+                © {% now "Y" %} کیا آسانسور - تمامی حقوق محفوظ است.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>

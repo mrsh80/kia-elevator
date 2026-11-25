@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block title %}
+محصولات | تجهیزات تخصصی آسانسور | کیا آسانسور
+{% endblock %}
+
+{% block meta_description %}
+مشاهده محصولات و تجهیزات تخصصی صنعت آسانسور در کیا آسانسور؛ شامل تابلو فرمان، تجهیزات کابین، درب آسانسور، موتور و گیربکس.
+{% endblock %}
+
+{% block og_title %}
+محصولات و تجهیزات آسانسور | کیا آسانسور
+{% endblock %}
+
+{% block og_description %}
+محصولات و تجهیزات تخصصی صنعت آسانسور در کیا آسانسور.
+{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+{% endblock %}
+{% block content %}
+
+<section class="products-page">
+
+<div class="container">
+
+
+    <div class="products-header">
+
+        <span class="section-label">
+            محصولات
+        </span>
+
+        <h1>
+            تجهیزات و محصولات آسانسور
+        </h1>
+
+        <p>
+            مجموعه‌ای از محصولات و تجهیزات تخصصی
+            صنعت آسانسور.
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <form
+            method="get"
+            action="{% url 'product_list' %}"
+            class="product-search"
+        >
+
+            <input
+                type="search"
+                name="q"
+                value="{{ query }}"
+                placeholder="جستجوی محصول..."
+                aria-label="جستجوی محصول"
+            >
+
+            <button type="submit">
+                جستجو
+            </button>
+
+        </form>
+
+
+        <!-- CATEGORY FILTER -->
+
+        <form
+            method="get"
+            action="{% url 'product_list' %}"
+            class="product-filter"
+        >
+
+            {% if query %}
+
+                <input
+                    type="hidden"
+                    name="q"
+                    value="{{ query }}"
+                >
+
+            {% endif %}
+
+
+            <label for="category">
+                دسته‌بندی
+            </label>
+
+
+            <select
+                name="category"
+                id="category"
+                onchange="this.form.submit()"
+            >
+
+                <option value="">
+                    همه محصولات
+                </option>
+
+
+                {% for category in categories %}
+
+                    <option
+                        value="{{ category.slug }}"
+                        {% if category.slug == category_slug %}
+                            selected
+                        {% endif %}
+                    >
+
+                        {{ category.name }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </form>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="products-grid">
+
+        {% for product in products %}
+
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        loading="lazy"
+                    >
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        {{ product.category.name }}
+                    </span>
+
+
+                    <h2>
+                        {{ product.name }}
+                    </h2>
+
+
+                    <p>
+                        {{ product.short_description }}
+                    </p>
+
+
+                    <a
+                        href="{% url 'product_detail' product.slug %}"
+                        class="product-link"
+                    >
+
+                        مشاهده محصول
+
+                        <span>←</span>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        {% empty %}
+
+            <p>
+                محصولی مطابق جستجو و فیلتر انتخاب‌شده پیدا نشد.
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- PAGINATION -->
+
+    {% if page_obj.has_other_pages %}
+
+        <nav
+            class="pagination"
+            aria-label="صفحه‌بندی محصولات"
+        >
+
+            {% if page_obj.has_previous %}
+
+                <a
+                    href="?q={{ query }}&category={{ category_slug }}&page={{ page_obj.previous_page_number }}"
+                    class="pagination-link"
+                    aria-label="صفحه قبلی"
+                >
+
+                    ←
+
+                </a>
+
+            {% endif %}
+
+
+            {% for num in page_obj.paginator.page_range %}
+
+                {% if page_obj.number == num %}
+
+                    <span class="pagination-link active">
+                        {{ num }}
+                    </span>
+
+                {% else %}
+
+                    <a
+                        href="?q={{ query }}&category={{ category_slug }}&page={{ num }}"
+                        class="pagination-link"
+                    >
+
+                        {{ num }}
+
+                    </a>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+            {% if page_obj.has_next %}
+
+                <a
+                    href="?q={{ query }}&category={{ category_slug }}&page={{ page_obj.next_page_number }}"
+                    class="pagination-link"
+                    aria-label="صفحه بعدی"
+                >
+
+                    →
+
+                </a>
+
+            {% endif %}
+
+        </nav>
+
+    {% endif %}
+
+</div>
+
+
+</section>
+
+{% endblock %}

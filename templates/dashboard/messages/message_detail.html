@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات پیام | کیا آسانسور</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/products.css' %}">
+</head>
+<body>
+
+<div class="products-page">
+
+    <header class="products-header">
+        <div>
+            <span class="section-eyebrow">MESSAGE DETAILS</span>
+            <h1>جزئیات پیام</h1>
+            <p>اطلاعات پیام دریافتی از مشتری</p>
+        </div>
+
+        <a href="{% url 'dashboard:message_list' %}" class="btn-secondary">بازگشت به پیام‌ها</a>
+    </header>
+
+    <div class="product-form-card">
+
+        <div class="message-detail-row">
+            <strong>نام فرستنده:</strong>
+            <span>{{ contact_message.name }}</span>
+        </div>
+
+        <div class="message-detail-row">
+            <strong>شماره تماس:</strong>
+            <span dir="ltr">{{ contact_message.phone }}</span>
+        </div>
+
+        <div class="message-detail-row">
+            <strong>ایمیل:</strong>
+            <span>{{ contact_message.email|default:"ثبت نشده" }}</span>
+        </div>
+
+        <div class="message-detail-row">
+            <strong>موضوع:</strong>
+            <span>{{ contact_message.subject }}</span>
+        </div>
+
+        <div class="message-detail-row">
+            <strong>تاریخ دریافت:</strong>
+            <span>{{ contact_message.created_at|date:"Y/m/d H:i" }}</span>
+        </div>
+
+        <div class="message-content">
+            <strong>متن پیام:</strong>
+            <p>{{ contact_message.message|linebreaksbr }}</p>
+        </div>
+
+        <div class="form-actions">
+
+            {% if perms.core.change_contactmessage %}
+                <form method="post" action="{% url 'dashboard:message_mark_unread' contact_message.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-primary">
+                        علامت‌گذاری به‌عنوان خوانده‌نشده
+                    </button>
+                </form>
+            {% endif %}
+
+            <a href="{% url 'dashboard:message_list' %}" class="btn-secondary">
+                بازگشت
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

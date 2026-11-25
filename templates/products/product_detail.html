@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ product.name }} | کیا آسانسور
+{% endblock %}
+
+
+{% block meta_description %}
+{{ product.short_description }}
+{% endblock %}
+
+
+{% block og_type %}
+product
+{% endblock %}
+
+
+{% block og_title %}
+{{ product.name }} | کیا آسانسور
+{% endblock %}
+
+
+{% block og_description %}
+{{ product.short_description }}
+{% endblock %}
+
+
+{% block structured_data %}
+
+<script type="application/ld+json">
+
+{
+    "@context": "https://schema.org",
+
+    "@type": "Product",
+
+    "name": "{{ product.name|escapejs }}",
+
+    "description": "{{ product.short_description|escapejs }}",
+
+    "image": [
+        "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}"
+    ],
+
+    "category": "{{ product.category.name|escapejs }}",
+
+    "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'product_detail' product.slug %}"
+}
+
+</script>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="product-detail">
+
+    <div class="container">
+
+        <div class="product-detail-grid">
+
+
+            <!-- Product Image -->
+
+            <div class="product-detail-image">
+
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                >
+
+            </div>
+
+
+            <!-- Product Information -->
+
+            <div class="product-detail-content">
+
+                <span class="product-category">
+                    {{ product.category.name }}
+                </span>
+
+
+                <h1>
+                    {{ product.name }}
+                </h1>
+
+
+                <p class="product-short-description">
+                    {{ product.short_description }}
+                </p>
+
+
+                <div class="product-description">
+
+                    <h2>
+                        درباره محصول
+                    </h2>
+
+                    <p>
+                        {{ product.description }}
+                    </p>
+
+                </div>
+
+
+                {% if product.technical_specs %}
+
+                    <div class="product-specs">
+
+                        <h2>
+                            مشخصات فنی
+                        </h2>
+
+                        <div class="specs-content">
+
+                            {{ product.technical_specs|linebreaks }}
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                <a
+                    href="{% url 'contact' %}"
+                    class="btn btn-primary product-contact-button"
+                >
+                    درخواست اطلاعات بیشتر
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+{{ category.name }} | کیا آسانسور
+{% endblock %}
+
+
+{% block content %}
+
+<section class="products-page">
+
+    <div class="container">
+
+        <div class="products-header">
+
+            <span class="section-label">
+                دسته‌بندی محصولات
+            </span>
+
+            <h1>
+                {{ category.name }}
+            </h1>
+
+            {% if category.description %}
+
+                <p>
+                    {{ category.description }}
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="products-grid">
+
+            {% for product in products %}
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <span class="product-category">
+                            {{ product.category.name }}
+                        </span>
+
+                        <h2>
+                            {{ product.name }}
+                        </h2>
+
+                        <p>
+                            {{ product.short_description }}
+                        </p>
+
+                        <a
+                            href="{% url 'product_detail' product.slug %}"
+                            class="product-link"
+                        >
+                            مشاهده محصول
+                            <span>←</span>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <p>
+                    محصولی در این دسته‌بندی وجود ندارد.
+                </p>
+
+            {% endfor %}
+
+        </div>
+                {% if page_obj.has_other_pages %}
+
+            <nav
+                class="pagination"
+                aria-label="صفحه‌بندی محصولات"
+            >
+
+                {% if page_obj.has_previous %}
+
+                    <a
+                        href="?page={{ page_obj.previous_page_number }}"
+                        class="pagination-link"
+                        aria-label="صفحه قبلی"
+                    >
+                        ←
+                    </a>
+
+                {% endif %}
+
+
+                {% for num in page_obj.paginator.page_range %}
+
+                    {% if page_obj.number == num %}
+
+                        <span class="pagination-link active">
+                            {{ num }}
+                        </span>
+
+                    {% else %}
+
+                        <a
+                            href="?page={{ num }}"
+                            class="pagination-link"
+                        >
+                            {{ num }}
+                        </a>
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+                {% if page_obj.has_next %}
+
+                    <a
+                        href="?page={{ page_obj.next_page_number }}"
+                        class="pagination-link"
+                        aria-label="صفحه بعدی"
+                    >
+                        →
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

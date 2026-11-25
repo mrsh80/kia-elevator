@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پیام‌های دریافتی | کیا آسانسور</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/products.css' %}">
+</head>
+<body>
+
+<div class="products-page">
+
+    <header class="products-header">
+        <div>
+            <span class="section-eyebrow">CONTACT MESSAGES</span>
+            <h1>پیام‌های دریافتی</h1>
+            <p>مدیریت پیام‌های ارسال‌شده از طریق فرم تماس سایت</p>
+        </div>
+
+        <a href="{% url 'dashboard:home' %}" class="btn-secondary">بازگشت به داشبورد</a>
+    </header>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="message-summary">
+        <strong>پیام‌های خوانده‌نشده:</strong>
+        <span>{{ unread_count }}</span>
+    </div>
+
+    <div class="products-toolbar">
+
+        <form method="get" class="filter-form">
+
+            <input type="text" name="q" value="{{ search_query }}" placeholder="نام، شماره، ایمیل یا موضوع...">
+
+            <select name="status">
+                <option value="">تمام پیام‌ها</option>
+                <option value="unread" {% if selected_status == "unread" %}selected{% endif %}>خوانده‌نشده</option>
+                <option value="read" {% if selected_status == "read" %}selected{% endif %}>خوانده‌شده</option>
+            </select>
+
+            <button type="submit" class="btn-primary">جست‌وجو</button>
+
+            <a href="{% url 'dashboard:message_list' %}" class="btn-secondary">پاک کردن</a>
+
+        </form>
+
+    </div>
+
+    <div class="products-table-wrapper">
+
+        <table class="products-table">
+
+            <thead>
+                <tr>
+                    <th>فرستنده</th>
+                    <th>شماره تماس</th>
+                    <th>موضوع</th>
+                    <th>وضعیت</th>
+                    <th>تاریخ دریافت</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for item in page_obj %}
+                    <tr>
+
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.phone }}</td>
+                        <td>{{ item.subject }}</td>
+
+                        <td>
+                            {% if item.is_read %}
+                                <span class="status-badge active">خوانده‌شده</span>
+                            {% else %}
+                                <span class="status-badge inactive">خوانده‌نشده</span>
+                            {% endif %}
+                        </td>
+
+                        <td>{{ item.created_at|date:"Y/m/d H:i" }}</td>
+
+                        <td class="action-buttons">
+                            <a href="{% url 'dashboard:message_detail' item.pk %}" class="edit-button">
+                                مشاهده
+                            </a>
+
+                            {% if perms.core.delete_contactmessage %}
+                                <a href="{% url 'dashboard:message_delete' item.pk %}" class="delete-button">
+                                    حذف
+                                </a>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="empty-table">پیامی پیدا نشد.</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% if page_obj.has_other_pages %}
+        <div class="pagination">
+
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}&q={{ search_query|urlencode }}&status={{ selected_status }}">قبلی</a>
+            {% endif %}
+
+            <span>صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&q={{ search_query|urlencode }}&status={{ selected_status }}">بعدی</a>
+            {% endif %}
+
+        </div>
+    {% endif %}
+
+</div>
+</body>
+</html>

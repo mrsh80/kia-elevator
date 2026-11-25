@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+دسترسی غیرمجاز | کیا آسانسور
+{% endblock %}
+
+
+{% block meta_description %}
+شما اجازه دسترسی به این صفحه را ندارید.
+{% endblock %}
+
+
+{% block meta_robots %}
+noindex, nofollow
+{% endblock %}
+
+
+{% block content %}
+
+<section class="error-page">
+
+    <div class="container">
+
+        <div class="error-content">
+
+            <span class="error-code">
+                403
+            </span>
+
+            <h1>
+                دسترسی غیرمجاز
+            </h1>
+
+            <p>
+                شما اجازه دسترسی به این صفحه را ندارید.
+            </p>
+
+            <a
+                href="{% url 'home' %}"
+                class="btn btn-primary"
+            >
+                بازگشت به صفحه اصلی
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

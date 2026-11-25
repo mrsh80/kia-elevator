@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }} | کیا آسانسور</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/products.css' %}">
+</head>
+<body>
+
+<div class="products-page">
+
+    <header class="products-header">
+        <div>
+            <span class="section-eyebrow">CATEGORY MANAGEMENT</span>
+            <h1>{{ page_title }}</h1>
+            <p>اطلاعات دسته‌بندی را وارد کنید.</p>
+        </div>
+
+        <a href="{% url 'dashboard:category_list' %}" class="btn-secondary">
+            بازگشت به دسته‌بندی‌ها
+        </a>
+    </header>
+
+    <div class="product-form-card">
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+
+                    {% if field.errors %}
+                        <div class="field-error">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">{{ submit_text }}</button>
+                <a href="{% url 'dashboard:category_list' %}" class="btn-secondary">انصراف</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

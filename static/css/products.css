@@ -1,0 +1,437 @@
+/* =========================================================
+   KIA ELEVATOR — PRODUCTS PAGE
+   Design: Industrial Luxury
+========================================================= */
+
+/* 1. Page */
+.products-page {
+    min-height: 70vh;
+    padding: 80px 0 110px;
+    background:
+        radial-gradient(circle at 90% 0%, rgba(217, 164, 65, 0.07), transparent 28%),
+        var(--color-off-white);
+}
+
+.products-page .container {
+    max-width: 1240px;
+}
+
+/* 2. Header */
+.products-header {
+    max-width: 780px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.products-header .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: var(--color-gold-dark);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.products-header .section-label::before,
+.products-header .section-label::after {
+    content: "";
+    width: 25px;
+    height: 1px;
+    background: var(--color-gold);
+}
+
+.products-header h1 {
+    margin: 0 0 18px;
+    color: var(--color-black);
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 900;
+    line-height: 1.5;
+}
+
+.products-header > p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: var(--color-muted);
+    font-size: 15px;
+    line-height: 2.2;
+}
+
+/* 3. Search and Filters */
+.products-toolbar {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 35px;
+    padding: 20px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.035);
+}
+
+.product-search,
+.product-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-search {
+    flex: 1;
+}
+
+.product-search input,
+.product-filter select {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    color: var(--color-text);
+    background: #fafafa;
+    border: 1px solid var(--color-border);
+    border-radius: 9px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-search input:focus,
+.product-filter select:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(217, 164, 65, 0.13);
+}
+
+.product-search input::placeholder {
+    color: #999;
+}
+
+.product-search button,
+.product-filter button {
+    min-height: 48px;
+    padding: 0 24px;
+    color: var(--color-black);
+    background: var(--color-gold);
+    border: 1px solid var(--color-gold);
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.product-search button:hover,
+.product-filter button:hover {
+    background: var(--color-gold-dark);
+    border-color: var(--color-gold-dark);
+    color: var(--color-white);
+}
+
+/* 4. Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+}
+
+/* 5. Product Card */
+.product-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--color-white);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.035);
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(217, 164, 65, 0.5);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.09);
+}
+
+/* 6. Product Image */
+.product-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: #eeeeee;
+}
+
+.product-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.13),
+        transparent 40%
+    );
+    pointer-events: none;
+}
+
+.product-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.55s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.07);
+}
+
+/* 7. Product Information */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 25px 24px 22px;
+}
+
+.product-category {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 13px;
+    padding: 6px 12px;
+    color: var(--color-gold-dark);
+    background: rgba(217, 164, 65, 0.12);
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.product-info h2 {
+    margin: 0 0 12px;
+    color: var(--color-black);
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.8;
+}
+
+.product-info p {
+    display: -webkit-box;
+    overflow: hidden;
+    margin: 0 0 22px;
+    color: var(--color-muted);
+    font-size: 13px;
+    line-height: 2.1;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.product-info a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 16px;
+    color: var(--color-black);
+    border-top: 1px solid var(--color-border);
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+
+
+.product-info a:hover {
+    color: var(--color-gold-dark);
+}
+
+/* 8. Empty State */
+.products-empty {
+    padding: 70px 25px;
+    text-align: center;
+    background: var(--color-white);
+    border: 1px dashed #d8d8d8;
+    border-radius: 15px;
+}
+
+.products-empty h2 {
+    margin: 0 0 12px;
+    color: var(--color-black);
+    font-size: 22px;
+}
+
+.products-empty p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 2;
+}
+
+/* 9. Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 55px;
+    direction: ltr;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 12px;
+    color: var(--color-text);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.pagination a:hover {
+    color: var(--color-black);
+    background: rgba(217, 164, 65, 0.15);
+    border-color: var(--color-gold);
+}
+
+.pagination .active {
+    color: var(--color-black);
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+}
+
+/* 10. Responsive — Tablet */
+@media (max-width: 1000px) {
+    .products-page {
+        padding: 65px 0 85px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    .products-toolbar {
+        gap: 12px;
+    }
+}
+
+/* 11. Responsive — Mobile */
+@media (max-width: 650px) {
+    .products-page {
+        padding: 45px 0 65px;
+    }
+
+    .products-header {
+        margin-bottom: 32px;
+    }
+
+    .products-header h1 {
+        font-size: 29px;
+    }
+
+    .products-header > p {
+        font-size: 13px;
+    }
+
+    .products-toolbar {
+        flex-direction: column;
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+
+    .product-search,
+    .product-filter {
+        width: 100%;
+    }
+
+    .product-search {
+        flex-wrap: wrap;
+    }
+
+    .product-search input {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .product-search button {
+        padding: 0 17px;
+    }
+
+    .product-filter select {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .product-info {
+        padding: 21px;
+    }
+
+    .product-info h2 {
+        font-size: 18px;
+    }
+
+    .pagination {
+        gap: 6px;
+        margin-top: 35px;
+    }
+
+    .pagination a,
+    .pagination span {
+        min-width: 36px;
+        height: 38px;
+        padding: 0 9px;
+    }
+}
+
+/* 12. Small Mobile */
+@media (max-width: 380px) {
+    .products-header h1 {
+        font-size: 25px;
+    }
+
+    .product-search button {
+        padding: 0 12px;
+        font-size: 12px;
+    }
+}
+
+/* 13. Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .product-card,
+    .product-image img,
+    .product-info a,
+    .product-info a::after {
+        transition: none;
+    }
+
+    .product-card:hover {
+        transform: none;
+    }
+
+    .product-card:hover .product-image img {
+        transform: none;
+    }
+}

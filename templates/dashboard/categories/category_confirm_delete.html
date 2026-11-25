@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حذف دسته‌بندی | کیا آسانسور</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/products.css' %}">
+</head>
+<body>
+
+<div class="products-page">
+
+    <div class="delete-confirm-card">
+
+        <span class="delete-warning-icon">!</span>
+
+        <h1>حذف دسته‌بندی</h1>
+
+        <p>
+            آیا از حذف دسته‌بندی
+            <strong>{{ category.name }}</strong>
+            اطمینان داری؟
+        </p>
+
+        <p class="warning-text">
+            دسته‌بندی دارای محصول قابل حذف نیست.
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <button type="submit" class="delete-button">تأیید حذف</button>
+
+            <a href="{% url 'dashboard:category_list' %}" class="btn-secondary">
+                انصراف
+            </a>
+        </form>
+
+    </div>
+
+</div>
+</body>
+</html>

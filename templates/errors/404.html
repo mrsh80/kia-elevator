@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+صفحه پیدا نشد | کیا آسانسور
+{% endblock %}
+
+
+{% block meta_description %}
+صفحه موردنظر شما در سایت کیا آسانسور پیدا نشد.
+{% endblock %}
+
+
+{% block meta_robots %}
+noindex, follow
+{% endblock %}
+
+
+{% block content %}
+
+<section class="error-page">
+
+    <div class="container">
+
+        <div class="error-content">
+
+            <span class="error-code">
+                404
+            </span>
+
+            <h1>
+                صفحه پیدا نشد
+            </h1>
+
+            <p>
+                صفحه‌ای که به دنبال آن هستید وجود ندارد
+                یا ممکن است آدرس آن تغییر کرده باشد.
+            </p>
+
+            <a
+                href="{% url 'home' %}"
+                class="btn btn-primary"
+            >
+                بازگشت به صفحه اصلی
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

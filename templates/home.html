@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+کیا آسانسور | تجهیزات صنعت آسانسور
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+
+            <span class="hero-label">
+                تجهیزات تخصصی صنعت آسانسور
+            </span>
+
+            <h1>
+                کیفیت و تکنولوژی
+                <span>در ارتفاعی متفاوت</span>
+            </h1>
+
+            <p>
+                ارائه و معرفی تجهیزات و محصولات تخصصی آسانسور
+                با تمرکز بر کیفیت، طراحی مدرن و عملکرد مطمئن.
+            </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'product_list' %}" class="btn btn-primary">
+            مشاهده محصولات
+            </a>
+
+            <a href="{% url 'contact' %}" class="btn btn-secondary">
+            تماس با ما
+            </a>
+
+        </div>
+
+        </div>
+
+
+        <div class="hero-image">
+            <div class="hero-image-placeholder">
+                <img
+                    src="{% static 'images/logo.jpg' %}"
+                    alt="لوگوی کیا آسانسور"
+                    >
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!-- ABOUT SECTION -->
+
+<section class="about-section">
+
+    <div class="container about-container">
+
+        <div class="about-content">
+
+            <span class="section-label">
+                درباره کیا آسانسور
+            </span>
+
+            <h2>
+                راهکارهای مطمئن
+                برای صنعت آسانسور
+            </h2>
+
+            <p>
+                کیا آسانسور با تمرکز بر ارائه و معرفی تجهیزات تخصصی
+                صنعت آسانسور، تلاش می‌کند مجموعه‌ای از محصولات
+                باکیفیت و کاربردی را در اختیار فعالان این حوزه قرار دهد.
+            </p>
+
+            <p>
+                هدف ما ارائه محصولاتی است که از نظر کیفیت، عملکرد
+                و قابلیت اطمینان بتوانند نیازهای پروژه‌های مختلف
+                آسانسور را پوشش دهند.
+            </p>
+
+            <a href="{% url 'about' %}" class="text-link">
+             بیشتر درباره ما
+            <span>←</span>
+            </a>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <div class="about-card-number">
+                01
+            </div>
+
+            <h3>
+                <span class="brand-highlight">کیفیت و اعتماد</span>
+            </h3>
+
+            <p>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- CATEGORIES SECTION -->
+
+<section class="categories-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-label">
+                    محصولات
+                </span>
+
+                <h2>
+                    دسته‌بندی تجهیزات
+                </h2>
+            </div>
+
+            <p>
+                تجهیزات و قطعات مورد نیاز صنعت آسانسور
+                در دسته‌بندی‌های مختلف.
+            </p>
+
+        </div>
+
+
+<div class="categories-grid">
+
+    {% for category in categories %}
+
+        <a
+            href="{% url 'category_products' category.slug %}"
+            class="category-card"
+        >
+
+            <span class="category-number">
+                {{ forloop.counter|stringformat:"02d" }}
+            </span>
+
+            <h3>
+                {{ category.name }}
+            </h3>
+
+            <span class="category-arrow">
+                ←
+            </span>
+
+        </a>
+
+    {% empty %}
+
+        <p>
+            در حال حاضر دسته‌بندی‌ای برای نمایش وجود ندارد.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+    </div>
+
+</section>
+<section class="featured-products">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="section-label">
+                محصولات منتخب
+            </span>
+
+            <h2>
+                برخی از محصولات ما
+            </h2>
+
+            <p>
+                مجموعه‌ای از تجهیزات تخصصی کیا آسانسور
+            </p>
+
+        </div>
+
+
+        <div class="products-grid">
+
+            {% for product in featured_products %}
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <span class="product-category">
+                            {{ product.category.name }}
+                        </span>
+
+                        <h3>
+                            {{ product.name }}
+                        </h3>
+
+                        <p>
+                            {{ product.short_description }}
+                        </p>
+
+                        <a
+                            href="{% url 'product_detail' product.slug %}"
+                            class="product-link"
+                        >
+                            مشاهده محصول
+                            <span>←</span>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <p>
+                    هنوز محصولی برای نمایش وجود ندارد.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="featured-products-action">
+
+            <a
+                href="{% url 'product_list' %}"
+                class="btn btn-primary"
+            >
+                مشاهده همه محصولات
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

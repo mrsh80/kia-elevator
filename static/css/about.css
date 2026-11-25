@@ -1,0 +1,282 @@
+/* =========================================================
+   KIA ELEVATOR
+   ABOUT PAGE
+   Design: Industrial Luxury
+========================================================= */
+
+/* 1. Main Section */
+
+.about-page {
+    position: relative;
+    overflow: hidden;
+    min-height: 70vh;
+    padding: 90px 0 110px;
+    background:
+        radial-gradient(
+            circle at 95% 5%,
+            rgba(217, 164, 65, 0.08),
+            transparent 30%
+        ),
+        #d5d5d3;;
+}
+
+.about-page .container {
+    max-width: 1200px;
+}
+
+/* 2. Page Header */
+
+.about-page-header {
+    max-width: 800px;
+    margin: 0 auto 65px;
+    text-align: center;
+}
+
+.about-page-header .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: var(--color-gold-dark);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.about-page-header .section-label::before,
+.about-page-header .section-label::after {
+    content: "";
+    width: 25px;
+    height: 1px;
+    background: var(--color-gold);
+}
+
+.about-page-header h1 {
+    margin: 0 0 15px;
+    color: var(--color-black);
+    font-size: clamp(34px, 5vw, 50px);
+    font-weight: 900;
+    line-height: 1.5;
+}
+
+.about-page-header > p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 16px;
+    line-height: 2;
+}
+
+/* 3. Main Content Layout */
+
+.about-page-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: stretch;
+    gap: 35px;
+}
+
+/* 4. About Text */
+
+.about-page-text {
+    padding: 40px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.035);
+}
+
+.about-page-text h2 {
+    position: relative;
+    margin: 0 0 28px;
+    padding-right: 18px;
+    color: var(--color-black);
+    font-size: 23px;
+    font-weight: 900;
+    line-height: 1.8;
+}
+
+.about-page-text h2::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 5px;
+    height: 28px;
+    background: var(--color-gold);
+    border-radius: 5px;
+    transform: translateY(-50%);
+}
+
+.about-page-text p {
+    margin: 0 0 18px;
+    color: #626262;
+    font-size: 14px;
+    line-height: 2.5;
+    text-align: justify;
+}
+
+.about-page-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* 5. Features Layout */
+
+.about-page-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+/* 6. Feature Cards */
+
+.about-feature {
+    position: relative;
+    overflow: hidden;
+    padding: 25px 28px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 13px;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.about-feature::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-gold);
+    transform: scaleY(0.3);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+}
+
+.about-feature:hover {
+    transform: translateX(-5px);
+    border-color: rgba(217, 164, 65, 0.5);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.about-feature:hover::before {
+    transform: scaleY(1);
+}
+
+.about-feature h3 {
+    margin: 0 0 10px;
+    color: var(--color-black);
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.about-feature p {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 13px;
+    line-height: 2.2;
+}
+
+/* 7. Tablet */
+
+@media (max-width: 900px) {
+    .about-page {
+        padding: 70px 0 85px;
+    }
+
+    .about-page-content {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .about-page-header {
+        margin-bottom: 45px;
+    }
+
+    .about-page-features {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .about-feature {
+        padding: 22px 18px;
+    }
+}
+
+/* 8. Mobile */
+
+@media (max-width: 650px) {
+    .about-page {
+        padding: 45px 0 65px;
+    }
+
+    .about-page-header {
+        margin-bottom: 32px;
+    }
+
+    .about-page-header h1 {
+        font-size: 32px;
+    }
+
+    .about-page-header > p {
+        font-size: 14px;
+    }
+
+    .about-page-content {
+        gap: 18px;
+    }
+
+    .about-page-text {
+        padding: 25px 21px;
+    }
+
+    .about-page-text h2 {
+        margin-bottom: 18px;
+        font-size: 20px;
+    }
+
+    .about-page-text p {
+        font-size: 13px;
+        text-align: right;
+        line-height: 2.3;
+    }
+
+    .about-page-features {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .about-feature {
+        padding: 22px;
+    }
+
+    .about-feature h3 {
+        font-size: 17px;
+    }
+}
+
+/* 9. Small Mobile */
+
+@media (max-width: 380px) {
+    .about-page-header h1 {
+        font-size: 28px;
+    }
+
+    .about-page-text {
+        padding: 21px 17px;
+    }
+}
+
+/* 10. Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    .about-feature,
+    .about-feature::before {
+        transition: none;
+    }
+
+    .about-feature:hover {
+        transform: none;
+    }
+}

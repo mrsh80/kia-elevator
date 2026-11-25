@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Django
+*.log
+local_settings.py
+
+# Database files
+*.sqlite3
+*.sqlite3-*
+*.db
+
+# User uploaded files
+media/
+
+# Backups
+backups/
+*.before-*
+
+# Collected static files
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Sensitive files
+*.pem
+*.key
+secrets/
+static/css/style_backup.css
