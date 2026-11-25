@@ -112,6 +112,23 @@ http://127.0.0.1:8000/
 | DEBUG | Enables or disables debug mode |
 | ALLOWED_HOSTS | Allowed hostnames |
 
+## Screenshots
+
+### Homepage
+![Homepage](docs/screenshots/home_page.png)
+
+### Products
+![Products](docs/screenshots/products.png)
+
+### Product Details
+![Product Details](docs/screenshots/products_detail.png)
+
+### Admin Dashboard
+![Admin Dashboard](docs/screenshots/admin_panel.png)
+
+### Contact
+![Contact](docs/screenshots/contact_us.png)
+
 ## License
 
 No open-source license has been specified for this project.
